@@ -126,6 +126,33 @@ kubectl get svc
 ##### - NodePort: http://<worker-node-IP>:<NodePort>  (ensure security group allows this)
 ##### - Or via Ingress Controller if deployed
 
+## Step 15: Install *kubeaudit* (on master) an open-source tool for auditing Kubernetes clusters.
+### Download latest release
+```bash
+curl -s https://api.github.com/repos/Shopify/kubeaudit/releases/latest \
+| grep browser_download_url \
+| grep linux_amd64 \
+| cut -d '"' -f 4 \
+| wget -i -
+```
+### Extract and move binary
+```bash
+tar -xvf kubeaudit_*_linux_amd64.tar.gz
+sudo mv kubeaudit /usr/local/bin/
+```
+### Move to system PATH
+```bash
+sudo mv kubeaudit /usr/local/bin/
+```
+### Verify installation
+```bash
+kubeaudit version
+```
+### Run Cluster Audit
+#### Audit all cluster resources for security issues
+```bash
+kubeaudit all
+```
 ## Security Group / Firewall Rules (Inbound & Outbound)
 ### Inbound (traffic coming to nodes)
 #### Master Node:
