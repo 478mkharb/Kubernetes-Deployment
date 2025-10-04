@@ -75,6 +75,10 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 ## Step 9: Install Pod Network (Flannel) (To be run only on master)
+#### - Kubernetes pods need to communicate with each other across nodes.
+#### - Each pod gets its own IP address, and Kubernetes expects all pods to be able to reach each other.
+#### - Flannel is a simple overlay network that allows pods on different nodes to communicate.
+#### - Other alternatives: Calico, Weave Net, Cilium — they all provide pod networking, but some add network policies, security, or advanced features.
 ### Option 1: Flannel (simple, lightweight)
 ```bash
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
